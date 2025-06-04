@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draft Picks Overview</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { text-align: center; }
+        .draft-container { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+        .draft { border: 1px solid #ccc; border-radius: 8px; padding: 16px; min-width: 250px; background: #fafafa; }
+        .draft h2 { font-size: 1.2em; margin-top: 0; }
+        .cards { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .card { width: 80px; height: 112px; background: #eee; border: 1px solid #bbb; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.9em; text-align: center; }
+        .card img { max-width: 100%; max-height: 100%; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Draft Picks Overview</h1>
+    <div class="draft-container" id="drafts"></div>
+
+    <script>
+        // Example data structure for drafts and picked cards
+        const drafts = [
+            {
+                name: "Draft 1",
+                picks: [
+                    { name: "Card A", image: "images/card-a.jpg" },
+                    { name: "Card B", image: "images/card-b.jpg" },
+                    { name: "Card C", image: "images/card-c.jpg" }
+                ]
+            },
+            {
+                name: "Draft 2",
+                picks: [
+                    { name: "Card D", image: "images/card-d.jpg" },
+                    { name: "Card E", image: "images/card-e.jpg" }
+                ]
+            }
+            // Add more drafts as needed
+        ];
+
+        function renderDrafts() {
+            const container = document.getElementById('drafts');
+            drafts.forEach(draft => {
+                const draftDiv = document.createElement('div');
+                draftDiv.className = 'draft';
+                draftDiv.innerHTML = `<h2>${draft.name}</h2>`;
+                const cardsDiv = document.createElement('div');
+                cardsDiv.className = 'cards';
+                draft.picks.forEach(card => {
+                    const cardDiv = document.createElement('div');
+                    cardDiv.className = 'card';
+                    if (card.image) {
+                        cardDiv.innerHTML = `<img src="${card.image}" alt="${card.name}" title="${card.name}">`;
+                    } else {
+                        cardDiv.textContent = card.name;
+                    }
+                    cardsDiv.appendChild(cardDiv);
+                });
+                draftDiv.appendChild(cardsDiv);
+                container.appendChild(draftDiv);
+            });
+        }
+
+        renderDrafts();
+    </script>
+</body>
+</html>
